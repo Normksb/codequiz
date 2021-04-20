@@ -8,9 +8,11 @@ var answerButton2 = document.getElementById("answer-2");
 var answerButton3 = document.getElementById("answer-3");
 var answerButton4 = document.getElementById("answer-4");
 var highScoresSection = document.getElementById("highscores")
+var questionText = document.getElementById("question-text");
 
 var secondsLeft = 75;
 var currentScore = 0;
+var currentQuestion = 0;
 
 var questions = [
     {
@@ -47,3 +49,30 @@ var questions = [
     }    
     
 ]
+
+startQuizButton.addEventListener("click", startQuiz)
+
+function quizTimer(){
+    setInterval(function () {
+    secondsLeft--;
+    timeLeft.textContent = "Time: " + secondsLeft
+    
+    if(timeLeft === 0) {
+      clearInterval(startQuiz);
+    }
+  }, 1000);
+}
+
+function startQuiz(){
+    quizTimer();
+    displayQuestion();
+}
+
+function displayQuestion(){
+    questionText.textContent = questions[currentQuestion].question
+    answerButton1.textContent = questions[currentQuestion].answer1
+    answerButton2.textContent = questions[currentQuestion].answer2
+    answerButton3.textContent = questions[currentQuestion].answer3
+    answerButton4.textContent = questions[currentQuestion].answer4
+
+}
