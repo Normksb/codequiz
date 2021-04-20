@@ -1,3 +1,4 @@
+//asign all of the elements that need to be manipulated to variables using get element by ID.
 var viewHighScoresButton = document.getElementById("view-highscores");
 var timeLeft = document.getElementById("time-left");
 var quizIntroTextSection = document.getElementById("quiz-intro-text");
@@ -10,10 +11,13 @@ var answerButton4 = document.getElementById("answer-4");
 var highScoresSection = document.getElementById("highscores")
 var questionText = document.getElementById("question-text");
 
+// Start the value to use for the timer to 75 seconds.
+// set the current score to 0 and the current question to 0. Setting the current question to 0 will match the array index for the 1st question.
 var secondsLeft = 75;
 var currentScore = 0;
 var currentQuestion = 0;
 
+// create an array of objects, each question is an object in the array.
 var questions = [
     {
         question: "Javascript first appeared in the year...",
@@ -50,25 +54,35 @@ var questions = [
     
 ]
 
+// add a click event listener to the quiz start button.
 startQuizButton.addEventListener("click", startQuiz)
+// answerButton1.addEventListener("click", checkAnswer(1), false)
+// answerButton2.addEventListener("click", checkAnswer(2), false)
+// answerButton3.addEventListener("click", checkAnswer(3), false)
+// answerButton4.addEventListener("click", checkAnswer(4), false)
 
+// start the quiz timer, run at an interval of every 1 second to decrement the time left and stop the timer when it reaches 0.
 function quizTimer(){
-    setInterval(function () {
+    var timer = setInterval(function () {
     secondsLeft--;
     timeLeft.textContent = "Time: " + secondsLeft
     
-    if(timeLeft === 0) {
-      clearInterval(startQuiz);
+    if(secondsLeft === 0) {
+      clearInterval(timer);
     }
   }, 1000);
 }
 
+// invoke the quizTimer and displayQuestion functions.
 function startQuiz(){
     quizTimer();
     displayQuestion();
 }
 
+// Place the question text into the h2 element and the answer options into the corresponding buttons.
 function displayQuestion(){
+    console.log(currentScore)
+    console.log(questions[currentQuestion])
     questionText.textContent = questions[currentQuestion].question
     answerButton1.textContent = questions[currentQuestion].answer1
     answerButton2.textContent = questions[currentQuestion].answer2
@@ -76,3 +90,54 @@ function displayQuestion(){
     answerButton4.textContent = questions[currentQuestion].answer4
 
 }
+
+// assign the entire section labbeled the-quiz to a vairable and attach an event listener for click to the entire section. Use the event click object to determine if the click actually occurred on a button. If it didn't, exit the function. If the click did happen on a button, then invoke the checkanswer function and pass it a parameter that identifies the data-answer of the button in question.
+var wrapper = document.getElementById('the-quiz');
+wrapper.addEventListener('click', function(event) {
+  var isButton = event.target.nodeName === 'BUTTON';
+  if (!isButton) {
+    return;
+  }
+  var answerid = event.target.dataset.answer;
+  checkAnswer(answerid);
+})
+
+// evaluate the correctness of the answer using the answerid from the wrapper event listener function and compare it to the correctanswer found in the corresponding array of question objects. adjust the score and the time left as appropriate and then call displayQuestion again to display the next question.
+function checkAnswer(answerid){
+    if(answerid==questions[currentQuestion].correctAnswer){
+        currentScore = currentScore+10
+    }
+    else{
+        secondsLeft = secondsLeft-10;
+    }
+    currentQuestion++
+    displayQuestion()
+}
+
+// function checkAnswer1(){
+//     if(questions[currentQuestion].correctAnswer==1){
+//         currentScore=currentScore+10;
+//     }
+//     console.log(currentScore);
+// }
+
+// function checkAnswer2(){
+//     if(2==questions[currentQuestion].correctAnswer){
+//         currentScore=currentScore+10;
+//     }
+//     console.log(currentScore);
+// }
+
+// function checkAnswer3(){
+//     if(3==questions[currentQuestion].correctAnswer){
+//         currentScore=currentScore+10;
+//     }
+//     console.log(currentScore);
+// }
+
+// function checkAnswer4(){
+//     if(4==questions[currentQuestion].correctAnswer){
+//         currentScore=currentScore+10;
+//     }
+//     console.log(currentScore);
+// }
