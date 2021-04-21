@@ -92,12 +92,17 @@ function startQuiz(){
 function displayQuestion(){
     console.log(currentScore)
     console.log(questions[currentQuestion])
+    if(currentQuestion == questions.length){
+        theQuizSection.style.display="none";
+        highScoresSection.style.display="block";
+    }
+    else{
     questionText.textContent = questions[currentQuestion].question
     answerButton1.textContent = questions[currentQuestion].answer1
     answerButton2.textContent = questions[currentQuestion].answer2
     answerButton3.textContent = questions[currentQuestion].answer3
     answerButton4.textContent = questions[currentQuestion].answer4
-
+    }
 }
 
 // assign the entire section labbeled the-quiz to a vairable and attach an event listener for click to the entire section. Use the event click object to determine if the click actually occurred on a button. If it didn't, exit the function. If the click did happen on a button, then invoke the checkanswer function and pass it a parameter that identifies the data-answer of the button in question.
