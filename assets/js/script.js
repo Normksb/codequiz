@@ -10,6 +10,8 @@ var answerButton3 = document.getElementById("answer-3");
 var answerButton4 = document.getElementById("answer-4");
 var highScoresSection = document.getElementById("highscores")
 var questionText = document.getElementById("question-text");
+var submitNameButton = document.getElementById("submitname");
+var userName = document.getElementById("name");
 
 // Start the value to use for the timer to 75 seconds.
 // set the current score to 0 and the current question to 0. Setting the current question to 0 will match the array index for the 1st question.
@@ -56,8 +58,8 @@ var questions = [
 
 // add a click event listener to the quiz start button.
 startQuizButton.addEventListener("click", startQuiz)
-// answerButton1.addEventListener("click", checkAnswer(1), false)
-// answerButton2.addEventListener("click", checkAnswer(2), false)
+// answerButton1.addEventListener("click", checkAnswer(1))
+// answerButton2.addEventListener("click", checkAnswer(2), true)
 // answerButton3.addEventListener("click", checkAnswer(3), false)
 // answerButton4.addEventListener("click", checkAnswer(4), false)
 
@@ -141,3 +143,20 @@ function checkAnswer(answerid){
 //     }
 //     console.log(currentScore);
 // }
+
+var highscoresStorage = []
+
+submitNameButton.addEventListener("click", saveHighscore)
+
+function saveHighscore(event){
+    event.preventDefault()
+    var name=userName.value
+    console.log(name)
+    if(name===""){
+        alert("please enter a name")
+    } else{
+        highscoresStorage.push(name)
+        highscoresStorage.push(currentScore)
+        localStorage.setItem("SavedHighscores",highscoresStorage)
+    }
+}
