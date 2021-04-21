@@ -16,7 +16,7 @@ var score = document.getElementById("score");
 
 // Start the value to use for the timer to 75 seconds.
 // set the current score to 0 and the current question to 0. Setting the current question to 0 will match the array index for the 1st question.
-var secondsLeft = 5;
+var secondsLeft = 75;
 var currentScore = 0;
 var currentQuestion = 0;
 
