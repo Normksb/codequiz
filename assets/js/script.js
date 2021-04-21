@@ -12,10 +12,11 @@ var highScoresSection = document.getElementById("highscores")
 var questionText = document.getElementById("question-text");
 var submitNameButton = document.getElementById("submitname");
 var userName = document.getElementById("name");
+var score = document.getElementById("score");
 
 // Start the value to use for the timer to 75 seconds.
 // set the current score to 0 and the current question to 0. Setting the current question to 0 will match the array index for the 1st question.
-var secondsLeft = 75;
+var secondsLeft = 5;
 var currentScore = 0;
 var currentQuestion = 0;
 
@@ -69,14 +70,20 @@ function quizTimer(){
     secondsLeft--;
     timeLeft.textContent = "Time: " + secondsLeft
     
-    if(secondsLeft === 0) {
+    if(secondsLeft < 1) {
       clearInterval(timer);
+      timeLeft.textContent = "Time: 0"
+      highScoresSection.style.display="block";
+      theQuizSection.style.display="none";
+
     }
   }, 1000);
 }
 
-// invoke the quizTimer and displayQuestion functions.
+// invoke the quizTimer and displayQuestion functions and display the quiz section
 function startQuiz(){
+    theQuizSection.style.display="block";
+    quizIntroTextSection.style.display="none";
     quizTimer();
     displayQuestion();
 }
@@ -113,6 +120,7 @@ function checkAnswer(answerid){
         secondsLeft = secondsLeft-10;
     }
     currentQuestion++
+    score.textContent = "Score: " + currentScore
     displayQuestion()
 }
 
