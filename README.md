@@ -1,6 +1,6 @@
 #code quiz
 
-![codequiz screenshot](./assets/images/Screenshot.PNG)
+![codequiz screenshot](https://normksb.github.io/codequiz/assets/images/Screenshot.png)
 
 Summary
 
